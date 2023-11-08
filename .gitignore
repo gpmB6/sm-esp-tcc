@@ -1,3 +1,6 @@
+# Arquivo de configuração de rede
+secrets.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
