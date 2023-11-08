@@ -1,5 +1,6 @@
-# Arquivo de configuração de rede
+# Arquivo de configuração de rede e do WebREPL
 secrets.py
+webrepl_cfg.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
