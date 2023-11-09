@@ -1,0 +1,1 @@
+# Testa se o potenciometro está funcional ## Potenciometro:# GND1, GPIO5(D1) e A0 (compartilhada com o sensor)from machine import Pin, ADCfrom time import sleeppot = Pin(5, Pin.OUT)analog = ADC(0)sens.off()while True:    pot.on()  analog_value = analog.read()  print(analog_value)  sleep(1)
