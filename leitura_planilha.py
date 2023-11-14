@@ -15,43 +15,33 @@ print("\nLista dos ultimos treinamentos:\n\n", lista)
 print('\n####################################\n')
 
 # pega o conjunto de elementos da posição solicitada da lista
+# modificar para ser input do cliente selecionar a posicao da lista
+# input = 1
+# conjunto = lista[input]
+# print(conjunto)
+
 #pega o tamanho da lista pra informar ao usuario
-tamanho = str(len(lista))
+tamanho = str(len(lista)-1)
 
-print('\n\nEscolha um dos treinamentos de 0 a ' + str(len(lista)) + ':')
-escolhe = input("Escolhe: ")
-print(escolhe)
+escolha = int(input('\n\nEscolha um dos treinamentos de 0 a ' + tamanho + ':\n'))
 
-inputa = 1
-conjunto = lista[inputa]
+conjunto = lista[escolha]
 print(conjunto)
-#conjunto_escolhido = lista[escolha]
-#print(conjunto_escolhido)
 
-#print('\n####################################\n')
+print('\n####################################\n')
 
 # de toda a lista, pega um parametro do motor:
 # usa o tamanho da lista para localizar o paramtro desejado
+print('\n\nOs parametros da lista selecionadas sao:\n')
+print('Motor:', lista[escolha]['Motor'])
+print('Sensor:', lista[escolha]['Sensor'])
+
+# caso queira acessar por meio da Data (ou horario)
 #for i in range(len(lista)):
 #  if lista[i]['Data'] == '13/11/2023':
 #    print(f'Parametro: {lista[i]['Motor']} no motor')
 #    print(f'Parametro: {lista[i]['Sensor']} no sensor')
 
-#parei aqui
-# for i in range(tamanho):
-#  if lista[i]['Data'
-
-
 print('\n####################################\n')
-
-#escolha = input("\nEscolha uma posicao: ")
-
-# tipo str
-# person = '{"name": "Bob", "languages": ["English", "French"]}'
-# tipo dict
-# person_dict = ujson.loads(person)
-# print( person_dict)
-# print("tipo do person_dict", type(person_dict))
-# print(person_dict['languages'])
 
 retorno.close()
