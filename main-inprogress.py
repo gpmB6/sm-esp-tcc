@@ -1,7 +1,6 @@
 import urequests
 import sys
-
-# HEADER DO SMARTMOTORS IFRS
+import webrepl
 
 def exibir_menu():
   print('Escolha uma opcao:')
@@ -16,11 +15,49 @@ def exibir_menu():
 # FUNCAO 2
 # PERMITE INSERIR MANUALMENTE UM TREINAMENTO
 
+def insere_treinamento():
+  print('\nPreparando para insercao manual...')
+  api_key = 'fj6vQD1kaPXtjaLN1cutzdMTiYHFVelpoGRR-FKZDet'
+  try:
+    motor_inserido = int(input('\nInforme o valor do motor: '))
+    sensor_inserido = int(input('\nInforme o valor do sensor: '))
+  
+    dados = {'value1':motor_inserido, 'value2':sensor_inserido}
+    print(dados)
+    request_headers = {'Content-Type': 'application/json'}
+
+    request = urequests.post(
+    'http://maker.ifttt.com/trigger/inserir/with/key/' + api_key,
+    json=dados,
+    headers=request_headers)
+
+    print(request.text)
+    print('\nProcedimento concluido!\n')
+    request.close()
+
+  except OSError as e:
+    print('Falha ao inserir os dados. Por favor, tente novamente mais tarde.')
+
+  print('\n####################################\n')
+
+  print('1. Inserir mais um treinamento')
+  print('2. Voltar ao menu anterior')
+  
+  treinamento_manual = input("O que deseja fazer? ")
+  
+  if treinamento_manual == "1":
+    print('Ok, vamos inserir um novo treinamento')
+    insere_treinamento()
+    
+  else:
+    print('Escolheu voltar para o menu principal')
+    main()
+    
 # FUNCAO 3
 # PERMITE ESCOLHER UM TREINAMENTO ANTERIOR
 
 def consulta_treinamento():
-  print('Obtendo lista de treinamentos...')
+  print('\nObtendo lista de treinamentos...')
   #URL do sheetsu
   url = "https://sheetsu.com/apis/v1.0su/52d37fb77dc7"
   #utiliza o urequests para pegar o conteúdo da URL
@@ -38,20 +75,20 @@ def consulta_treinamento():
   if consulta_treinamento == "1":
     #pega o tamanho da lista pra informar ao usuario
     tamanho = str(len(lista)-1)
-    escolha = int(input('\n\nEscolha um dos treinamentos de 0 a ' + tamanho + ':\n'))
+    escolha = int(input('\n\nEscolha um dos treinamentos de 0 a ' + tamanho + ':'))
     conjunto = lista[escolha]
-    print(conjunto)
+    print('\n', conjunto)
     print('\n####################################\n')
     # de toda a lista, pega um parametro do motor:
     # usa o tamanho da lista para localizar o paramtro desejado
-    print('\n\nOs parametros da lista selecionadas sao:\n')
+    print('\nOs parametros selecionados sao:\n')
     print('Motor:', lista[escolha]['Motor'])
     print('Sensor:', lista[escolha]['Sensor'])
-    print('Agora tenho que mandar esses dados pra executar')
+    print('\nAgora tenho que mandar esses dados pra executar.\n')
     retorno.close()
 
   else:
-    print('Voltando ao menu principal...\n')
+    print('Escolheu voltar para o menu principal')
     main()
 # FUNCAO 4
 # SAIR DO PROGRAMA
@@ -61,6 +98,7 @@ def consulta_treinamento():
 #  if lista[i]['Data'] == '13/11/2023':
 #    print(f'Parametro: {lista[i]['Motor']} no motor')
 #    print(f'Parametro: {lista[i]['Sensor']} no sensor')
+
 # print('\n####################################\n')
 
 def main():
@@ -73,10 +111,9 @@ def main():
             print('fazer executar o codigo do smartmotors')
             #executar_sm()
         elif opcao == "2":
-            print('fazer inserir manualmente com ifttt')
+            insere_treinamento()
             #exibir_tarefas()
         elif opcao == "3":
-            print('fazer consultar treinamentos anteriores')
             consulta_treinamento()
         elif opcao == "4":
             print('Saindo...')
@@ -86,3 +123,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
