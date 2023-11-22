@@ -28,3 +28,17 @@ for i in range (115, 40, step):
     servo.duty(i)
     sleep (0.1)
     servo.duty(77)
+
+# para controlar por meio do potenciometro
+# def potenciometro_motor():
+#  sens.off()
+#  pot.on()
+#  analog_value = analog.read()
+#  actuatorVal = analog_value
+#  return actuatorVal
+#  angle=180/948*actuatorVal
+#  writeVal=94/180*angle + 24
+#  #como ele dá um float, precisamos converter
+#  servo.duty(int(writeVal))
+#  sleep(.5)
+#  #valores do potenciometro: de 2 a 948
