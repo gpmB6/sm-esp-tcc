@@ -1,11 +1,25 @@
+
 import uos, machine
+import sys
 import os
 import esp
 import time
+import ubinascii
 esp.osdebug(None)
-import webrepl
+import network, webrepl, secrets
+import urequests
 import gc
 gc.collect()
+
+station = network.WLAN(network.STA_IF)
+station.active(True)
+station.connect(secrets.ssid, secrets.password)
+
+while station.isconnected() == False:
+  pass
+
+print('Conectado.')
+print(station.ifconfig())
 
 print("""
 
