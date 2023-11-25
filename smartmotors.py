@@ -1,63 +1,114 @@
-# Botao1: 3V e GPIO4(D2)
-# Botao2: 3V e GPIO0(D3)
-# Led: GND3 e GPIO12(D6)
-# Potenciometro: GND1, GPIO5(D1) e A0 (compartilhada com o sensor)
-# Sensor (LDR): GND1, GPIO16(D0) e A0 (compartilhada com o potenciometro)
-# Motor (servo): GND1, VCC3.3_2 e GPIO14(D5)
-
 from machine import Pin, ADC, PWM
-from time import sleep
+import utime
 
-# Definicao de variaveis
-botao1 = Pin(4, Pin.IN)
-botao2 = Pin(0, Pin.IN)
-led = Pin(12, Pin.OUT)
-sens = Pin(16, Pin.OUT)
-pot = Pin(5, Pin.OUT)
+api_key = 'fj6vQD1kaPXtjaLN1cutzdMTiYHFVelpoGRR-FKZDet'
+
+#compartilham o input no ADC(0)
+sensorPort = 16
+potPin = 5
 analog = ADC(0)
-servo = PWM(Pin(14), freq=50)
 
-# Inteiros
-trainingNum = 0
+buttonPin = 4
+ledPin = 12
+servoPin = 14
+servo = PWM(Pin(servoPin), freq=50, duty=0)
+sensorVal = 0
+actuatorVal = 0
+buttonVal = 0
+lastButtonVal = 0
 buttonCounter = 0
-element_count_max = 50
+trainingNum = 0
 
-# Booleanos
-buttonPressed = 0
-buttonHeld = 0
-trainingDone = 0
-sensorArray = [None] * element_count_max
-actuatorArray = [None] * element_count_max
+buttonPressed = False
+buttonHeld = False
+trainingDone = False
 
-print('Iniciando a definicao de funcoes...')
+ELEMENT_COUNT_MAX = 50
+sensorArray = [0] * ELEMENT_COUNT_MAX
+actuatorArray = [0] * ELEMENT_COUNT_MAX
 
-# Funcoes
-def estado_botao1():
-  print('retorna o estado do botao1')
+led = Pin(ledPin, Pin.OUT)
+sens = Pin(sensorPort, Pin.OUT)
+pot = Pin(potPin, Pin.OUT)
 
-def estado_botao2():
-  print('retorna o estado do botao2')
+def setup():
+    print("Running setup")
 
-def estado_sensor():
-  print('retorna o estado do sensor - valores de 49 a 966 no simulador VALIDAR')
+def map_range(value, from_low, from_high, to_low, to_high):
+    # Perform linear mapping
+    from_range = from_high - from_low
+    to_range = to_high - to_low
+    scaled_value = (value - from_low) / from_range
+    mapped_value = to_low + (scaled_value * to_range)
+    return int(mapped_value)
 
-def estado_potenciometro():
-  print('retorna o estado do controle (potenciometro)')
+def read_sensor(sensor_pin):
+    return analog.read()
 
-def estado_motor():
-  print('')
- 
-print('Definicao de funcoes concluida...')
- 
-# sintaxe da chamada da funcao
-# estado_botoes()  
+def getSensor():
+    pot.off()
+    sens.on()
+    return read_sensor(sens)
 
-print('Validando os estados atuais...')
+def getCtrl():
+    sens.off()
+    pot.on()
+    return read_sensor(pot)
 
-# Validacao do estado atual
+def writeActuator(val):
+    mapped_val = map_range(val, 0, 948, 0, 180)
+    servo.duty(mapped_val)
 
-estado_logico1 = botao1.value()
-estado_logico2 = botao2.value()
-#acrescentar linha que pega o estado do valor do sensor
 
-print('Validacao de estados concluida...')
+# Example loop
+while True:
+    buttonVal = Pin(buttonPin).value()
+    sensorVal = getSensor()
+    actuatorVal = getCtrl()
+
+    buttonHeld = (not buttonVal and lastButtonVal and buttonCounter > 15)
+    buttonPressed = (not buttonVal and lastButtonVal and not buttonHeld)
+
+    if buttonHeld:
+        trainingDone = True
+        led.off()
+        print("botao pressionado")
+        print("Valor do sensorVal: ", sensorVal)
+        print("Valor do potVal: ", actuatorVal)
+        buttonCounter = 0
+        dados = {'value1':actuatorVal, 'value2':sensorVal}
+        print(dados)
+        request_headers = {'Content-Type': 'application/json'}
+        request = urequests.post(
+          'http://maker.ifttt.com/trigger/inserir/with/key/' + api_key,
+          json=dados,
+          headers=request_headers)
+
+        print(request.text)
+        request.close()
+
+    if buttonVal:
+        buttonCounter += 1
+    else:
+        buttonCounter = 0
+
+    if trainingDone:
+        closestPos = 0
+        minDiff = abs(sensorArray[0] - sensorVal)
+        for i in range(trainingNum):
+            if abs(sensorArray[i] - sensorVal) < minDiff:
+                minDiff = abs(sensorArray[i] - sensorVal)
+                closestPos = i
+        writeActuator(actuatorArray[closestPos])
+
+    elif buttonPressed:
+        led.on()
+        sensorArray[trainingNum] = sensorVal
+        actuatorArray[trainingNum] = actuatorVal
+        trainingNum += 1
+
+    else:
+        writeActuator(actuatorVal)
+
+    utime.sleep_ms(30)
+    lastButtonVal = buttonVal
