@@ -1,4 +1,4 @@
-api_key = 'fj6vQD1kaPXtjaLN1cutzdMTiYHFVelpoGRR-FKZDet'
+import secrets
 
 try:
   #sensor = float(input("Escolha a luminosidade: "))
@@ -13,7 +13,7 @@ try:
   request_headers = {'Content-Type': 'application/json'}
 
   request = urequests.post(
-    'http://maker.ifttt.com/trigger/editar/with/key/' + api_key,
+    'http://maker.ifttt.com/trigger/editar/with/key/' + secrets.api_key,
     json=sensor_readings,
     headers=request_headers)
 
