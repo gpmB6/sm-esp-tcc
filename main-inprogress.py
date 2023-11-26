@@ -1,6 +1,9 @@
+
 import urequests
 import sys
 import webrepl
+import smart
+import secrets
 
 def exibir_menu():
   print('Escolha uma opcao:')
@@ -11,13 +14,15 @@ def exibir_menu():
 
 # FUNCAO 1
 # EXECUTA O CODIGO DO SMART MOTORS
+def executar_sm():
+  exec(open('smart.py').read())
 
 # FUNCAO 2
 # PERMITE INSERIR MANUALMENTE UM TREINAMENTO
-
 def insere_treinamento():
   print('\nPreparando para insercao manual...')
-  api_key = 'fj6vQD1kaPXtjaLN1cutzdMTiYHFVelpoGRR-FKZDet'
+
+
   try:
     motor_inserido = int(input('\nInforme o valor do motor: '))
     sensor_inserido = int(input('\nInforme o valor do sensor: '))
@@ -27,7 +32,7 @@ def insere_treinamento():
     request_headers = {'Content-Type': 'application/json'}
 
     request = urequests.post(
-    'http://maker.ifttt.com/trigger/inserir/with/key/' + api_key,
+    'http://maker.ifttt.com/trigger/inserir/with/key/' + secrets.api_key,
     json=dados,
     headers=request_headers)
 
@@ -37,6 +42,7 @@ def insere_treinamento():
 
   except OSError as e:
     print('Falha ao inserir os dados. Por favor, tente novamente mais tarde.')
+
 
   print('\n####################################\n')
 
@@ -90,6 +96,7 @@ def consulta_treinamento():
   else:
     print('Escolheu voltar para o menu principal')
     main()
+
 # FUNCAO 4
 # SAIR DO PROGRAMA
 
@@ -108,8 +115,8 @@ def main():
         opcao = input("\nEscolha uma opcao: ")
         
         if opcao == "1":
-            print('fazer executar o codigo do smartmotors')
-            #executar_sm()
+            print('Escolheu executar o SmartMotors. Programa em execucao...')
+            executar_sm()
         elif opcao == "2":
             insere_treinamento()
             #exibir_tarefas()
@@ -123,4 +130,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
