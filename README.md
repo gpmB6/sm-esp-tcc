@@ -13,5 +13,7 @@ Menus:
 PRIMEIRO USO:</br>
 Edite o secrets.py inserindo o ssid (nome da rede) e em password (a senha da rede) na qual deseja se conectar. A placa possui compatibilidade com redes 2.4 GHz. Para dúvidas sobre a conexão consulte o passo 6: "Conexão a outras redes", presente no tutorial "ESP8266 COM MICROPYTHON WEBREPL".
 
+ATENÇÃO! Sempre após edição do **secrets.py** é preciso reiniciar a placa para que a mesma identifique as novas modificações realizadas.
+
 PERSONALIZAÇÕES:</br>
-Caso queira fazer uso de uma planilha diferente da utilizada aqui (a qual tenha total gestão sobre), é necessário modificar a variável "api_key".
+Caso queira fazer uso de uma planilha diferente da utilizada aqui (a qual tenha total gestão sobre), é necessário modificar a variável "api_key", presente também no secrets.py.
