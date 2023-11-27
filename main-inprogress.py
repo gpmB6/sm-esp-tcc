@@ -1,8 +1,9 @@
+
 import urequests
 import sys
 import webrepl
 import smart
-from smart import sensorArray, trainingNum, actuatorArray
+from smart import sensorArray, trainingNum, actuatorArray, writeActuator
 import secrets
 
 def exibir_menu():
@@ -56,13 +57,18 @@ def insere_treinamento():
     insere_treinamento()
     
   else:
-    print('Escolheu voltar para o menu principal\n')
+    print('Escolheu voltar para o menu principal')
     main()
     
 # FUNCAO 3
 # PERMITE ESCOLHER UM TREINAMENTO ANTERIOR
 
 def consulta_treinamento():
+  ELEMENT_COUNT_MAX_READ = 50
+  sensArray = [0] * ELEMENT_COUNT_MAX_READ
+  potArray = [0] * ELEMENT_COUNT_MAX_READ
+  readingNum = 0
+  
   print('\nObtendo lista de treinamentos...')
   #URL do sheetsu
   url = "https://sheetsu.com/apis/v1.0su/52d37fb77dc7"
@@ -90,21 +96,42 @@ def consulta_treinamento():
     print('\nOs parametros selecionados sao:\n')
     print('Motor:', lista[escolha]['Motor'])
     print('Sensor:', lista[escolha]['Sensor'])
-    print('\nEnviando parametro para execucao...\n')
-    moto_val = lista[escolha]['Motor']
-    sens_val = lista[escolha]['Sensor']
-    moto_convert = int(moto_val)
-    sens_convert = int(sens_val)
-    sensorArray[trainingNum] = sens_convert
-    actuatorArray[trainingNum] = int(moto_val)
-    closestPos = 0
-    minDiff = abs(sensorArray[0] - sens_convert)
-    for i in range(trainingNum):
-        if abs(sensorArray[i] - sens_convert) < minDiff:
-            minDiff = abs(sensorArray[i] - sens_convert)
-            closestPos = i
-    writeActuator(actuatorArray[closestPos])
+    
+    motorVal = int(lista[escolha]['Motor'])
+    sensVal = int(lista[escolha]['Sensor'])
+    
+    sensArray[readingNum] = sensVal
+    potArray[readingNum] = motorVal
 
+    readingNum += 1
+    
+    escolha2 = int(input('\nSelecione outro conjunto de parametros: '))
+    conjunto2 = lista[escolha2]
+    print('\n', conjunto2)
+    print('\n####################################\n')
+    
+    print('\nOs parametros selecionados sao:\n')
+    print('Motor:', lista[escolha2]['Motor'])
+    print('Sensor:', lista[escolha2]['Sensor'])
+    
+    motorVal = int(lista[escolha]['Motor'])
+    sensVal = int(lista[escolha]['Sensor'])
+    
+    sensArray[readingNum] = sensVal
+    potArray[readingNum] = motorVal
+
+    print('\nEnviando parametro para execucao...\n')
+    
+    closestPos = 0
+    minDiff = abs(sensArray[0] - sensVal)
+    for i in range(readingNum):
+        if abs(sensArray[i] - sensVal) < minDiff:
+            minDiff = abs(sensArray[i] - sensVal)
+            closestPos = i
+    writeActuator(potArray[closestPos])
+    
+    print('Treinamento passado com sucesso.\n\n')
+    
   else:
     print('Escolheu voltar para o menu principal')
     main()
