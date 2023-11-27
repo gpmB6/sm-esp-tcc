@@ -56,7 +56,7 @@ def insere_treinamento():
     insere_treinamento()
     
   else:
-    print('Escolheu voltar para o menu principal')
+    print('Escolheu voltar para o menu principal\n')
     main()
     
 # FUNCAO 3
