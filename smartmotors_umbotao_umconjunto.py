@@ -71,19 +71,22 @@ while True:
         trainingDone = True
         led.off()
         print("Botao pressionado")
-        print("Valor do sensorVal: ", sensorVal)
-        print("Valor do potVal: ", actuatorVal)
+        print("Training Num: ", trainingNum)
+        for i in range(1, trainingNum):
+          #print('Valore da posicao do sensor: ', sensorArray[i])
+          #print('Valores da posicao do motor: ', actuatorArray[i])
+          dados = {'value1':actuatorArray[i], 'value2':sensorArray[i]} 
+          #print('\n', dados)
+          request_headers = {'Content-Type': 'application/json'}
+          request = urequests.post(
+            'http://maker.ifttt.com/trigger/inserir/with/key/' + secrets.api_key,
+            json=dados,
+            headers=request_headers)
+          
+          print(request.text)
+          request.close()
+          
         buttonCounter = 0
-        dados = {'value1':actuatorVal, 'value2':sensorVal}
-        print(dados)
-        request_headers = {'Content-Type': 'application/json'}
-        request = urequests.post(
-          'http://maker.ifttt.com/trigger/inserir/with/key/' + secrets.api_key,
-          json=dados,
-          headers=request_headers)
-
-        print(request.text)
-        request.close()
 
     if buttonVal:
         buttonCounter += 1
@@ -110,3 +113,5 @@ while True:
 
     utime.sleep_ms(30)
     lastButtonVal = buttonVal
+
+
