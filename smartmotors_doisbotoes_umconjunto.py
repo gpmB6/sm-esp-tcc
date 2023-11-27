@@ -88,6 +88,8 @@ while True:
 
         print(request.text)
         request.close()
+        trainingDone = False
+        button2Val = False
 
     if buttonVal:
         buttonCounter += 1
