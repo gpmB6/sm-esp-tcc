@@ -1,8 +1,8 @@
-
 import urequests
 import sys
 import webrepl
 import smart
+from smart import sensorArray, trainingNum, actuatorArray
 import secrets
 
 def exibir_menu():
@@ -90,12 +90,25 @@ def consulta_treinamento():
     print('\nOs parametros selecionados sao:\n')
     print('Motor:', lista[escolha]['Motor'])
     print('Sensor:', lista[escolha]['Sensor'])
-    print('\nAgora tenho que mandar esses dados pra executar.\n')
-    retorno.close()
+    print('\nEnviando parametro para execucao...\n')
+    moto_val = lista[escolha]['Motor']
+    sens_val = lista[escolha]['Sensor']
+    moto_convert = int(moto_val)
+    sens_convert = int(sens_val)
+    sensorArray[trainingNum] = sens_convert
+    actuatorArray[trainingNum] = int(moto_val)
+    closestPos = 0
+    minDiff = abs(sensorArray[0] - sens_convert)
+    for i in range(trainingNum):
+        if abs(sensorArray[i] - sens_convert) < minDiff:
+            minDiff = abs(sensorArray[i] - sens_convert)
+            closestPos = i
+    writeActuator(actuatorArray[closestPos])
 
   else:
     print('Escolheu voltar para o menu principal')
     main()
+
 
 # FUNCAO 4
 # SAIR DO PROGRAMA
