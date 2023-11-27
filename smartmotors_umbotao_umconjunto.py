@@ -1,7 +1,5 @@
 from machine import Pin, ADC, PWM
-import utime
-
-api_key = 'fj6vQD1kaPXtjaLN1cutzdMTiYHFVelpoGRR-FKZDet'
+import utime, secrets
 
 #compartilham o input no ADC(0)
 sensorPort = 16
@@ -9,6 +7,7 @@ potPin = 5
 analog = ADC(0)
 
 buttonPin = 4
+button2Pin = 0
 ledPin = 12
 servoPin = 14
 servo = PWM(Pin(servoPin), freq=50, duty=0)
@@ -25,6 +24,7 @@ trainingDone = False
 
 ELEMENT_COUNT_MAX = 50
 sensorArray = [0] * ELEMENT_COUNT_MAX
+
 actuatorArray = [0] * ELEMENT_COUNT_MAX
 
 led = Pin(ledPin, Pin.OUT)
@@ -35,7 +35,6 @@ def setup():
     print("Running setup")
 
 def map_range(value, from_low, from_high, to_low, to_high):
-    # Perform linear mapping
     from_range = from_high - from_low
     to_range = to_high - to_low
     scaled_value = (value - from_low) / from_range
@@ -59,10 +58,9 @@ def writeActuator(val):
     mapped_val = map_range(val, 0, 948, 0, 180)
     servo.duty(mapped_val)
 
-
-# Example loop
 while True:
     buttonVal = Pin(buttonPin).value()
+    #button2Val = Pin(button2Pin).value()
     sensorVal = getSensor()
     actuatorVal = getCtrl()
 
@@ -72,7 +70,7 @@ while True:
     if buttonHeld:
         trainingDone = True
         led.off()
-        print("botao pressionado")
+        print("Botao pressionado")
         print("Valor do sensorVal: ", sensorVal)
         print("Valor do potVal: ", actuatorVal)
         buttonCounter = 0
@@ -80,7 +78,7 @@ while True:
         print(dados)
         request_headers = {'Content-Type': 'application/json'}
         request = urequests.post(
-          'http://maker.ifttt.com/trigger/inserir/with/key/' + api_key,
+          'http://maker.ifttt.com/trigger/inserir/with/key/' + secrets.api_key,
           json=dados,
           headers=request_headers)
 
