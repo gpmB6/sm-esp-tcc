@@ -1,4 +1,4 @@
-#Funções relacionadas ao sistema operacional, manipulação de arquivos / diretorios
+#Funcoes relacionadas ao sistema operacional, manipulação de arquivos / diretorios
 import uos
 #Leitura e gravacao de arquivos
 import os
