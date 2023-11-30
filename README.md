@@ -34,6 +34,8 @@ Etapa opcional caso queira fazer uso de uma planilha diferente da utilizada no p
 3) É necessário modificar a variável "api_key" e a "url", presentes também no secrets.py. Reinicie a placa novamente.
 
 
+</br><b>Obs.:</b> todos os arquivos iniciados por "testa_" tem como finalidade testagem dos componentes da placa de forma individual e sob demanda. Se for necessário testar alguma porta específica para a resposta do componente, utilize-os através da IDE ou do WebREPL.</br>
+
 # :hammer: Funcionalidades do projeto
 
 - `Executar o SmartMotors`: roda o SM, permitindo que o usuário treine a placa para o comportamento esperado de acordo com quantidade de luminosidade e posição do motor. Após a conclusão do treinamento, envia os parâmetros para a planilha.
