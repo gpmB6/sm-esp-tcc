@@ -2,13 +2,17 @@
 <h1 align="center"> SmartMotors com ESP8266 usando Micropython </h1>
 
 Código para ESP8266 utilizando Firmware de Micropython
-Testado em versões 2.7 e superiores.
 
 Detalhes do projeto podem ser localizados no site:
 https://sites.google.com/view/smartmotors/in%C3%ADcio
+
 Menus: 
   - Paramêtros e Gráficos são atualizados em tempo real de acordo com a inclusão de dados na planilha (seja através da placa ou manualmente).
   - Tutoriais contém o passo a passo da configuração, da gravação do Firmware à integração com o IFTTT, Apps Script, Sheetsu, criação da shield e código (aqui presente).
+
+<p align="center">
+<img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/>
+</p>
 
 PRIMEIRO USO:</br>
 
