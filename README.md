@@ -15,7 +15,7 @@ Menus:
 
 
 <h2> PRIMEIRO USO: </h2></br>
-Para a primeira utilização em um ambiente cuja rede não tenha sido ainda utilizada, é necessário seguir os passos 1 e 2. </br>
+Para a primeira utilização em um ambiente cuja rede não tenha sido ainda utilizada, é necessário seguir os passos 1 e 2. </br></br>
 
 1) Edite o secrets.py inserindo o ssid (nome da rede) e em senha (a senha da rede) na qual deseja se conectar. A placa possui compatibilidade com redes 2.4 GHz. Para dúvidas sobre a conexão consulte o passo 6: "Conexão a outras redes", presente no tutorial <a href = "https://fab.poalab.net.br/#!/projects/esp8266-com-micropython-webrepl" target="_blank"> "ESP8266 COM MICROPYTHON WEBREPL" </a>.
 
@@ -29,7 +29,7 @@ Siga as instruções de habilitar ou não sua execução na inicialização da p
 
 
 <h2> PERSONALIZAÇÕES: </h2> 
-Etapa opcional caso queira fazer uso de uma planilha diferente da utilizada no projeto (da qual tenha total gestão sobre). </br>
+Etapa opcional caso queira fazer uso de uma planilha diferente da utilizada no projeto (da qual tenha total gestão sobre). </br></br>
 
 3) É necessário modificar a variável "api_key" e a "url", presentes também no secrets.py. Reinicie a placa novamente.
 
