@@ -34,7 +34,7 @@ while True:
         trainingDone = True
         led.off()
         print("Botao pressionado")
-        for i in range(1, trainingNum):
+        for i in range(trainingNum):
           dados = {'value1':actuatorArray[i], 'value2':sensorArray[i]} 
           request_headers = {'Content-Type': 'application/json'}
           request = urequests.post(
