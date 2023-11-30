@@ -7,8 +7,7 @@
 
 Código para ESP8266 utilizando Firmware de Micropython
 
-Detalhes do projeto podem ser localizados no site:
-https://sites.google.com/view/smartmotors/in%C3%ADcio
+Detalhes do projeto podem ser localizados <a href="https://sites.google.com/view/smartmotors/in%C3%ADcio" target="_blank"> clicando aqui </a>
 
 Menus: 
   - Paramêtros e Gráficos são atualizados em tempo real de acordo com a inclusão de dados na planilha (seja através da placa ou manualmente).
