@@ -21,7 +21,7 @@ Para a primeira utilização em um ambiente cuja rede não tenha sido ainda util
 
 🟥 - ATENÇÃO! Sempre após edição do **secrets.py** é preciso reiniciar a placa para que a mesma identifique as novas modificações realizadas nesse arquivo. Esse processo pode ser realizado via "Ctrl + D" ou simplesmente desconectando e conectando novamente a placa de sua fonte de energia.
 
-2) Através da IDE de sua preferência, importe e configure o WebREPL da seguinte maneira:
+2) Através da IDE de sua preferência (no projeto foi utilizado uPyCraft), importe e configure o WebREPL da seguinte maneira:
 
 $ import webrepl_setup
 
