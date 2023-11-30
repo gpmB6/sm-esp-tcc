@@ -33,7 +33,7 @@ while True:
     if buttonHeld:
         trainingDone = True
         led.off()
-        print("Botao pressionado")
+        print("Botao 1 pressionado, aprendizagem finalizada.")
         for i in range(trainingNum):
           dados = {'value1':actuatorArray[i], 'value2':sensorArray[i]} 
           request_headers = {'Content-Type': 'application/json'}
