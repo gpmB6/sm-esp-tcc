@@ -42,6 +42,8 @@ def insere_treinamento():
 
         print('\nOk, vamos inserir um novo treinamento.')
 
+insere_treinamento()
+
 # Chama a funcao
 if __name__ == "__main__":
     insere_treinamento()
