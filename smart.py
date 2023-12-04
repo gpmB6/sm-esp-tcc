@@ -1,7 +1,7 @@
 from machine import Pin, ADC, PWM
 from config import *
 from utils import *
-import utime, secrets
+import utime, secrets, urequests, sys
 
 #define as variaveis  
 sensorVal = 0
