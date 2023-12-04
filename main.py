@@ -1,5 +1,3 @@
-# main.py
-
 # Funcao que abre um arquivo generico
 def executa_arquivo(arquivo):
     try:
