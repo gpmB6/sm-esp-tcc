@@ -46,4 +46,4 @@ insere_treinamento()
 
 # Chama a funcao
 if __name__ == "__main__":
-    insere_treinamento()
+  exec(open('main.py').read())
