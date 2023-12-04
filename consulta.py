@@ -6,6 +6,8 @@ sensVal = 0
 motorVal = 0
 readingNum = 0
 
+logic_state2 = False
+
 print('\nObtendo lista de treinamentos...')
 
 #URL do sheetsu
@@ -71,5 +73,5 @@ if consulta_treinamento == "1":
       logic_state2 = True
       break
         
-if logic_state2:
+if logic_state2 or consulta_treinamento == "2":
   exec(open('main.py').read())
