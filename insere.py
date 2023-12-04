@@ -1,4 +1,4 @@
-import urequests, secrets
+import urequests, secrets, sys
 
 def insere_treinamento():
     while True:
