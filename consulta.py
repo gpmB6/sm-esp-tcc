@@ -1,6 +1,6 @@
 from config import *
 from utils import *
-import utime, urequests, secrets
+import utime, urequests, secrets, sys
 
 sensVal = 0
 motorVal = 0
