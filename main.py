@@ -1,3 +1,8 @@
+import utime
+
+# Espera 8 segundos para eu cessar o WebREPL
+utime.sleep_ms(8000)
+
 # Funcao que abre um arquivo generico
 def executa_arquivo(arquivo):
     try:
