@@ -62,6 +62,7 @@ while True:
                 minDiff = abs(sensorArray[i] - sensorVal)
                 closestPos = i
         writeActuator(actuatorArray[closestPos])
+        utime.sleep_ms(30)
 
     elif buttonPressed:
         sensorArray[trainingNum] = sensorVal
