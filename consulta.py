@@ -72,6 +72,6 @@ if consulta_treinamento == "1":
       print("Retornando...")
       logic_state2 = True
       break
-        
-if logic_state2 or consulta_treinamento == "2":
+      
+if logic_state2 == True or consulta_treinamento == "2":
   exec(open('main.py').read())
